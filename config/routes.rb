@@ -1,3 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :users, only: [:create, :new] do
+    resources :tweets, only: [:index]
+  end
+
+  resources :tweets
+
+  get "/sessions", controller: :sessions, action: :new
+
 end
