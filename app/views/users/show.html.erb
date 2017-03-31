@@ -2,11 +2,13 @@
   <%= link_to 'New Tweet', new_tweet_path %>
 <% end %>
 
+<h2>Tweets for <%= @user.username %></h2>
+
 <ul>
   <% @tweets.each do |tweet| %>
     <li><%= tweet.message %></li>
     <ul>
-      <li><%= time_ago_in_words(tweet.created_at) %></li>
+      <li><%= time_ago_in_words(tweet.created_at) %> ago</li>
       <% if current_user == tweet.user %>
       <li><%= link_to 'Edit', edit_tweet_path(tweet) %></li>
       <li><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></li>

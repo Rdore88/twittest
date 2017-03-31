@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      # NewUserMailer.sign_up(@user).deliver_now
+      NewUserMailer.sign_up(@user).deliver_now
       redirect_to tweets_path, notice: "User created"
     else
       render "new"
