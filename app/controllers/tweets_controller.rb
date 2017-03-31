@@ -1,4 +1,4 @@
-sclass TweetsController < ApplicationController
+class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
 
   # GET /tweets
@@ -12,7 +12,7 @@ sclass TweetsController < ApplicationController
 
   # GET /tweets/new
   def new
-    @tweet = Tweet.new
+    @tweet = current_user.tweets.new
   end
 
   # GET /tweets/1/edit
@@ -22,9 +22,9 @@ sclass TweetsController < ApplicationController
   # POST /tweets
   def create
     @tweet = Tweet.new(tweet_params)
-
+    @tweet.user = current_user
     if @tweet.save
-      redirect_to @tweet, notice: 'Tweet was successfully created.'
+      redirect_to user_path(current_user), notice: 'Tweet was successfully created.'
     else
       render :new
     end

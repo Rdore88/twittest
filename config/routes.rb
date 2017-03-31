@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
 
-  resources :users, only: [:create, :new] do
-    resources :tweets, only: [:index]
+  resources :sessions
+
+  resources :users, only: ["create", "new", "show"] do
+
   end
 
   resources :tweets
 
-  get "/sessions", controller: :sessions, action: :new
+  root controller: "tweets", action: "index"
+
+
+
+
 
 end

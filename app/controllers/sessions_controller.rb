@@ -9,9 +9,9 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(username: params[:username])
-    if @user && @user.password == params[:password]
+    if @user == @user.authenticate(params[:password])
       session[:current_user_id] = @user.id
-      redirect_to user_tweets_path(@user)
+      redirect_to user_path(@user)
     else
       render "new"
     end
@@ -21,5 +21,4 @@ class SessionsController < ApplicationController
     session[:current_user_id] = nil
     redirect_to tweets_path
   end
-
 end

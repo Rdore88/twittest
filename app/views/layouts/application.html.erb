@@ -6,6 +6,22 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <nav>
+      <%= link_to tweets_path do %>
+        <%= image_tag "twitter_bird" %>
+      <% end %>
+
+      <aside class="global-links">
+        <% if current_user %>
+          <%= current_user&.username %> |
+          <%= link_to "logout", "/sessions/#{current_user.id}", method: "delete" %>
+        <% else %>
+          <%= link_to "Create User", "/users/new" %> |
+          <%= link_to "Sign In", "/sessions/new" %>
+        <% end %>
+      </aside>
+    </nav>
   </head>
 
   <body>
